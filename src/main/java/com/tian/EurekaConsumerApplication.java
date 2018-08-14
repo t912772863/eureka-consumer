@@ -1,5 +1,6 @@
 package com.tian;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
@@ -16,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
  * @EnableCircuitBreaker 注解用来开启服务的降级保护等功能
  *
  */
+@MapperScan("com.tian.dao")
 @EnableCircuitBreaker
 @EnableFeignClients
 @EnableDiscoveryClient

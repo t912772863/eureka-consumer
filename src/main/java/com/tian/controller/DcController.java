@@ -96,7 +96,7 @@ public class DcController {
     @RequestMapping("test3/{id}")
     public String test3(@PathVariable Long id){
         TestEntity entity = userInfoRemote.queryById2(id);
-        ResponseData responseData = userInfoRemote.queryById3(id);
+        ResponseData responseData = userInfoRemote.queryById3(id, "this is a", new TestEntity(1,"aa",null));
         System.out.println(responseData.toString());
         System.out.println(entity.toString());
         return entity.toString();
