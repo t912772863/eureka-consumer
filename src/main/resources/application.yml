@@ -1,0 +1,30 @@
+# 服务名
+spring:
+  application:
+    name: eureka-consumer
+
+# 服务端口号
+server:
+  port: 2101
+# 注册中心的地址
+eureka:
+  instance:
+    appname: eureka-consumer
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:1001/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+#----------------------  数据库连接信息
+spring:
+  datasource:
+    url: jdbc:mysql://118.126.115.206:3306/baoji_orders
+    username: root
+    password: Tt912772863
+#----------------------- redis缓存相关　　　　　　　
+# 单机
+  redis:
+    host: 127.0.0.1
+    port: 6379
+

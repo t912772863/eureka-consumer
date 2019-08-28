@@ -45,9 +45,9 @@
 			<artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
 		</dependency>
 		<!--伪装远程调用-->
-<!--		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-feign</artifactId>
+			<artifactId>spring-cloud-starter-feign</artifactId>
 		</dependency>-->
 
 		<!--服务降级保护等-->

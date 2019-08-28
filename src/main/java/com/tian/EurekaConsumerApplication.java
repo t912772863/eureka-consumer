@@ -40,11 +40,6 @@ public class EurekaConsumerApplication {
 	}
 
 	@Bean
-	public RestTemplate restTemplate1() {
-		return new RestTemplate();
-	}
-
-	@Bean
 	public DataSource dataSource(@Value("${spring.datasource.username}") String userName,
 								 @Value("${spring.datasource.password}") String password,
 								 @Value("${spring.datasource.url}") String url,
