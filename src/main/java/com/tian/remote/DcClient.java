@@ -1,6 +1,5 @@
 package com.tian.remote;
 
-import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -8,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * 这样本地在进行调用的时候可以类似于注入一个普通的service层
  * Created by Administrator on 2018/7/31 0031.
  */
-@FeignClient("eureka-client")
+//@FeignClient("eureka-client")
 public interface DcClient {
 
     @GetMapping("/dc")

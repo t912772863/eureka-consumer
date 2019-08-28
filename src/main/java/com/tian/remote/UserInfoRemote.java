@@ -2,7 +2,6 @@ package com.tian.remote;
 
 import com.tian.common.other.ResponseData;
 import com.tian.dao.entity.TestEntity;
-import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * Created by Administrator on 2018/8/2 0002.
  */
-@FeignClient("eureka-client")
+//@FeignClient("eureka-client")
 @RequestMapping("userInfo")
 public interface UserInfoRemote {
     /**

@@ -1,14 +1,20 @@
 package com.tian;
 
+import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.commons.dbcp.BasicDataSource;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
+
+import javax.sql.DataSource;
 
 
 /**
@@ -19,9 +25,8 @@ import org.springframework.web.client.RestTemplate;
  */
 @MapperScan("com.tian.dao")
 @EnableCircuitBreaker
-@EnableFeignClients
-@EnableDiscoveryClient
-@SpringBootApplication
+@EnableEurekaClient
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 public class EurekaConsumerApplication {
 
 	/**
@@ -37,6 +42,32 @@ public class EurekaConsumerApplication {
 	@Bean
 	public RestTemplate restTemplate1() {
 		return new RestTemplate();
+	}
+
+	@Bean
+	public DataSource dataSource(@Value("${spring.datasource.username}") String userName,
+								 @Value("${spring.datasource.password}") String password,
+								 @Value("${spring.datasource.url}") String url,
+								 @Value("com.mysql.jdbc.Driver") String driverClassName){
+		BasicDataSource dataSource =  new BasicDataSource();
+		dataSource.setUsername(userName);
+		dataSource.setPassword(password);
+		dataSource.setUrl(url);
+		dataSource.setDriverClassName(driverClassName);
+
+		return dataSource;
+    }
+
+	@Bean
+    public SqlSessionFactoryBean sqlSessionFactoryBean(DataSource dataSource){
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        sqlSessionFactoryBean.setDataSource(dataSource);
+        return sqlSessionFactoryBean;
+    }
+
+	@Bean
+	public ActiveMQConnectionFactory activeMQConnectionFactory(){
+		return new ActiveMQConnectionFactory();
 	}
 
 	public static void main(String[] args) {

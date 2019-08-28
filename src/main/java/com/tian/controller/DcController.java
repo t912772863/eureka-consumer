@@ -27,11 +27,11 @@ public class DcController {
     RestTemplate restTemplate;
     @Resource(name = "restTemplate1")
     RestTemplate restTemplate1;
-    @Autowired
+    @Autowired(required = false)
     DcClient dcClient;
     @Autowired
     ConsumerService consumerService;
-    @Autowired
+    @Autowired(required = false)
     UserInfoRemote userInfoRemote;
 
     /**

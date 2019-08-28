@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Random;
  */
 @Service
 public class OrderInfoService {
-    @Autowired
+    @Autowired(required = false)
     private OrderInfoMapper orderInfoMapper;
 //    @Autowired
 //    private UserInfoRemote userInfoRemote;
@@ -25,7 +26,6 @@ public class OrderInfoService {
      *
      *
      */
-//    @TxTransaction(isStart = true)
     @Transactional
     public void testTransaction(){
         OrderInfo orderInfo = new OrderInfo();
@@ -33,6 +33,9 @@ public class OrderInfoService {
         orderInfo.setPayer(1L);
         orderInfo.setPayee(2L);
         orderInfo.setMemo("test data.");
+        Date now = new Date();
+        orderInfo.setCreateTime(now);
+        orderInfo.setModifyTime(now);
 
 
         orderInfoMapper.insertSelective(orderInfo);

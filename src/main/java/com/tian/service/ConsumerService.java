@@ -1,6 +1,5 @@
 package com.tian.service;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -40,7 +39,7 @@ public class ConsumerService {
      *
      * @return
      */
-    @HystrixCommand(fallbackMethod = "fallback")
+//    @HystrixCommand(fallbackMethod = "fallback")
     public String consumer() {
         String result = restTemplate.getForObject("http://eureka-client/dc", String.class);
         System.out.println("result = "+result);
@@ -52,7 +51,7 @@ public class ConsumerService {
         return "this is fallback method response.";
     }
 
-    @HystrixCommand(fallbackMethod = "fallback2")
+//    @HystrixCommand(fallbackMethod = "fallback2")
     public String consumer2(){
         String result = restTemplate.getForObject("http://eureka-client/dc", String.class);
         System.out.println("result = "+result);
