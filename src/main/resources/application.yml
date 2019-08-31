@@ -6,25 +6,18 @@ spring:
 # 服务端口号
 server:
   port: 2101
-# 注册中心的地址
+  tomcat:
+    # tomcat同时处理请求的线程数
+    max-threads: 10
+
 eureka:
   instance:
+    # 当前服务在注册中心的名字
     appname: eureka-consumer
+    prefer-ip-address: true
   client:
     service-url:
+      # 注册中心的地址
       defaultZone: http://127.0.0.1:1001/eureka/
-    register-with-eureka: true
-    fetch-registry: true
 
-#----------------------  数据库连接信息
-spring:
-  datasource:
-    url: jdbc:mysql://118.126.115.206:3306/baoji_orders
-    username: root
-    password: Tt912772863
-#----------------------- redis缓存相关　　　　　　　
-# 单机
-  redis:
-    host: 127.0.0.1
-    port: 6379
 

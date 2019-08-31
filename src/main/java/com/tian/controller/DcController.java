@@ -6,7 +6,6 @@ import com.tian.remote.DcClient;
 import com.tian.remote.UserInfoRemote;
 import com.tian.service.ConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,28 +19,14 @@ import javax.annotation.Resource;
  */
 @RestController
 public class DcController {
-    @Autowired
-    LoadBalancerClient loadBalancerClient;
-    @Resource(name = "restTemplate")
+    @Resource
     RestTemplate restTemplate;
-    @Autowired(required = false)
+    @Autowired
     DcClient dcClient;
     @Autowired
     ConsumerService consumerService;
-    @Autowired(required = false)
+    @Autowired
     UserInfoRemote userInfoRemote;
-
-    /**
-     * 演示客户端, 消费服务端的接口
-     * @return
-     */
-//    @GetMapping("/consumer")
-//    public String dc(){
-//        ServiceInstance serviceInstance = loadBalancerClient.choose("eureka-client");
-//        String url = "http://"+serviceInstance.getHost()+":"+serviceInstance.getPort()+"/dc";
-//        System.out.println(url);
-//        return restTemplate1.getForObject(url, String.class);
-//    }
 
     /**
      * 通过负载均衡, 不用自己显示指定, 获取哪个节点的服务.

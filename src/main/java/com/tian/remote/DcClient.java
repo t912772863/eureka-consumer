@@ -1,5 +1,6 @@
 package com.tian.remote;
 
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -8,10 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
  * Created by Administrator on 2018/7/31 0031.
  *
  */
-//@FeignClient("eureka-client")
+@FeignClient("eureka-client")
 public interface DcClient {
 
-    @GetMapping("/dc")
+    @GetMapping("/dc2")
     String consumer();
 
 }

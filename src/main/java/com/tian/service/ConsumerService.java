@@ -1,5 +1,6 @@
 package com.tian.service;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -39,8 +40,11 @@ public class ConsumerService {
      *
      * @return
      */
-//    @HystrixCommand(fallbackMethod = "fallback")
+    @HystrixCommand(fallbackMethod = "fallback")
     public String consumer() {
+        /*
+        当下面这个方法返回慢时, 会触发fallbckMethod方法, 但是当下面这个方法返回后, 后续代码还会执行.
+         */
         String result = restTemplate.getForObject("http://eureka-client/dc", String.class);
         System.out.println("result = "+result);
         System.out.println("---------服务降级, 我也会打印.");
@@ -51,7 +55,7 @@ public class ConsumerService {
         return "this is fallback method response.";
     }
 
-//    @HystrixCommand(fallbackMethod = "fallback2")
+    @HystrixCommand(fallbackMethod = "fallback2")
     public String consumer2(){
         String result = restTemplate.getForObject("http://eureka-client/dc", String.class);
         System.out.println("result = "+result);
