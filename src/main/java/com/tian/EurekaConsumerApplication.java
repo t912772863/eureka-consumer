@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
@@ -23,11 +24,14 @@ import javax.sql.DataSource;
  *
  * @EnableCircuitBreaker 注解用来开启服务的降级保护等功能
  *
+ * @EnableHystrix 也可以用来开启服务降级保护等功能
+ *
  */
 @MapperScan("com.tian.dao")
 @EnableCircuitBreaker
 @EnableDiscoveryClient
 @EnableFeignClients
+@EnableHystrix
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 public class EurekaConsumerApplication {
 

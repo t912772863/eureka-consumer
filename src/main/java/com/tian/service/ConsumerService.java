@@ -1,6 +1,7 @@
 package com.tian.service;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -55,7 +56,14 @@ public class ConsumerService {
         return "this is fallback method response.";
     }
 
-    @HystrixCommand(fallbackMethod = "fallback2")
+    /**
+     * 指定这个方法的超时时间为3000毫秒.
+     * 指定线程隔离模式下, 核心纯种数为5个.
+     * @return
+     */
+    @HystrixCommand(fallbackMethod = "fallback2",
+            commandProperties = @HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds", value = "3000"),
+            threadPoolProperties = @HystrixProperty(name = "coreSize", value = "5"))
     public String consumer2(){
         String result = restTemplate.getForObject("http://eureka-client/dc", String.class);
         System.out.println("result = "+result);

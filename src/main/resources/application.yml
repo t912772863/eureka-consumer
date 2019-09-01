@@ -20,4 +20,14 @@ eureka:
       # 注册中心的地址
       defaultZone: http://127.0.0.1:1001/eureka/
 
+feign:
+  hystrix:
+    # 开启hystrix服务保护功能.默认是线程池隔离模式.默认开启了服务熔断.降级.
+    enabled: true
+
+
+
+
+
+
 
