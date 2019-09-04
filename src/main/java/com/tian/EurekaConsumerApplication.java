@@ -1,5 +1,6 @@
 package com.tian;
 
+import com.ctrip.framework.apollo.spring.annotation.EnableApolloConfig;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -33,6 +34,7 @@ import javax.sql.DataSource;
 @EnableFeignClients
 @EnableHystrix
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@EnableApolloConfig
 public class EurekaConsumerApplication {
 
 	/**
