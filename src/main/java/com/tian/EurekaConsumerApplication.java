@@ -1,6 +1,8 @@
 package com.tian;
 
 import com.ctrip.framework.apollo.spring.annotation.EnableApolloConfig;
+import com.tian.stream.IReadMsg;
+import com.tian.stream.ISendMsg;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -14,6 +16,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,6 +30,8 @@ import javax.sql.DataSource;
  *
  * @EnableHystrix 也可以用来开启服务降级保护等功能
  *
+ * @EnableBinding(ISendMsg.class) 开始stream功能,绑定mq  ISendMsg为自己定义的类名
+ *
  */
 @MapperScan("com.tian.dao")
 @EnableCircuitBreaker
@@ -35,6 +40,7 @@ import javax.sql.DataSource;
 @EnableHystrix
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @EnableApolloConfig
+@EnableBinding({ISendMsg.class, IReadMsg.class})
 public class EurekaConsumerApplication {
 
 	/**
